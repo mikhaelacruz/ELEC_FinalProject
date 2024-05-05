@@ -2,7 +2,8 @@ import "../CSS/Home.css";
 import { DataContext } from "../DataContext";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-function Todo() {
+
+function Home() {
   const { loggedIn, setLoggedIn } = useContext(DataContext);
 
   const navigate = useNavigate();
@@ -14,9 +15,9 @@ function Todo() {
 
   return (
     <div className="homeBody">
-      <p>Home Page</p>
+      <p>Hello, {loggedIn.username}!</p>
     </div>
   );
 }
 
-export default Todo;
+export default Home;

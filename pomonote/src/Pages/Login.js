@@ -31,7 +31,7 @@ const Login = () => {
         return;
       }
 
-      setLoggedIn({ username: form.username, email: form.email });
+      setLoggedIn({ username: test.username, email: form.email });
 
       navigate("/home");
       return;
