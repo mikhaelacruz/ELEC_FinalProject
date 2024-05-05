@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <div className="homeBody">
-      <p>Hello, {loggedIn.username}!</p>
+      <p>Hello, {loggedIn?.username || ""}!</p>
     </div>
   );
 }
