@@ -50,7 +50,8 @@ function App() {
       ) : null}
 
       <Routes>
-        <Route index path="/login" element={<Login />} />
+        <Route index element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
         <Route path="/todo" element={<Todo />} />
