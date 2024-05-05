@@ -56,12 +56,20 @@
 }
 
 .loginForm input {
-  padding: 1.2rem;
-  background-color: transparent;
+  padding: 1.2rem;  
+  background-color: #FBE6F2;
   border: none;
   outline: none;
   flex: 1;
   font-size: 1.2rem;
+
+}
+
+.loginForm input:focus {
+  background-color: transparent !important;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .loginBtn {
