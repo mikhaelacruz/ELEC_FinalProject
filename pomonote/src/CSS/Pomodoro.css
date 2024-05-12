@@ -1,0 +1,58 @@
+.pomodoroBody {
+  margin-left: 7.3rem;
+  margin-right: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex: 1;
+  height: 2rem;
+  align-items: center;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1.2rem #fbe6f2;
+  width: 18rem;
+  font-size: 5.5rem;
+  height: 18rem;
+  border-radius: 50%;
+}
+
+.button {
+  border-radius: 30px;
+  outline: none;
+  border: none;
+  background-color: #fbe6f2 !important;
+  align-self: center;
+  padding: 1rem 2rem !important;
+  padding-block: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.smallb {
+  border-radius: 30px;
+  outline: none;
+  border: none;
+  background-color: #fbe6f2 !important;
+  align-self: center;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
