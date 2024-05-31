@@ -67,21 +67,21 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const storedData = localStorage.getItem("secs");
     if (storedData) {
-      setUsers(JSON.parse(storedData));
+      setSeconds(JSON.parse(storedData));
     }
   }, []);
 
   useEffect(() => {
     const storedData = localStorage.getItem("resetSecond");
     if (storedData) {
-      setUsers(JSON.parse(storedData));
+      setResetSeconds(JSON.parse(storedData));
     }
   }, []);
 
   useEffect(() => {
     const storedData = localStorage.getItem("timing");
     if (storedData) {
-      setUsers(JSON.parse(storedData));
+      setTiming(JSON.parse(storedData));
     }
   }, []);
 
