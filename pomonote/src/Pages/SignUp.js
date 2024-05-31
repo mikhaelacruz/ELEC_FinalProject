@@ -28,34 +28,43 @@ const SignUp = () => {
     if (loggedIn) navigate("/home");
   }, []);
 
+  const validateEmail = (email) => {
+    // Regex for email validation
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const validate = () => {
     if (
-      form.email == "" ||
-      form.username == "" ||
-      form.password == "" ||
-      form.confirmPassword == ""
+      form.email === "" ||
+      form.username === "" ||
+      form.password === "" ||
+      form.confirmPassword === ""
     ) {
       alert("Fields cannot be null.");
       return;
     }
 
-    if (users.find((x) => x.email == form.email)) {
+    if (!validateEmail(form.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    if (users.find((x) => x.email === form.email)) {
       alert("Email already exists.");
       return;
     }
 
-    if (form.password != form.confirmPassword) {
-      alert("Password do not match.");
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match.");
       return;
     }
 
     //update state
-    setUsers((prev) => {
-      return [
-        ...prev,
-        { username: form.username, email: form.email, password: form.password },
-      ];
-    });
+    setUsers((prev) => [
+      ...prev,
+      { username: form.username, email: form.email, password: form.password },
+    ]);
 
     alert("Sign Up successful!.");
 
@@ -66,7 +75,7 @@ const SignUp = () => {
     <div className="body">
       <form className="loginForm" onSubmit={(e) => e.preventDefault()}>
         <div className="logo">
-          <img src="/Blog.png" alt="No img" />
+          <img src="/Vegapotsu.png" alt="" />
         </div>
 
         <div className="inputWithIcon">
