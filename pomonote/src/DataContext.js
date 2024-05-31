@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 
 // Create the context
 export const DataContext = createContext();
@@ -17,6 +23,16 @@ export const DataProvider = ({ children }) => {
 
   const [loggedIn, setLoggedIn] = useState(
     JSON.parse(localStorage.getItem("login")) || null
+  );
+
+  const [seconds, setSeconds] = useState(
+    JSON.parse(localStorage.getItem("secs")) || 1500
+  );
+  const [resetSeconds, setResetSeconds] = useState(
+    JSON.parse(localStorage.getItem("resetSecond")) || 1500
+  );
+  const [timing, setTiming] = useState(
+    JSON.parse(localStorage.getItem("timing")) || false
   );
 
   // Load state from local storage on component mount
@@ -48,6 +64,27 @@ export const DataProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const storedData = localStorage.getItem("secs");
+    if (storedData) {
+      setUsers(JSON.parse(storedData));
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("resetSecond");
+    if (storedData) {
+      setUsers(JSON.parse(storedData));
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("timing");
+    if (storedData) {
+      setUsers(JSON.parse(storedData));
+    }
+  }, []);
+
   // Save state to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem("users", JSON.stringify(users));
@@ -65,6 +102,49 @@ export const DataProvider = ({ children }) => {
     localStorage.setItem("subjects", JSON.stringify(subjects));
   }, [subjects]);
 
+  useEffect(() => {
+    localStorage.setItem("secs", JSON.stringify(seconds));
+  }, [seconds]);
+
+  useEffect(() => {
+    localStorage.setItem("resetSecond", JSON.stringify(resetSeconds));
+  }, [resetSeconds]);
+
+  useEffect(() => {
+    localStorage.setItem("timing", JSON.stringify(timing));
+  }, [timing]);
+
+  // useRef is used to store the timer function
+  const intervalRef = useRef(null);
+
+  // Clean up the interval on unmount
+  useEffect(() => {
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  const startTimer = useCallback(() => {
+    if (timing || seconds === 0) return;
+
+    setTiming(true);
+
+    intervalRef.current = setInterval(() => {
+      setSeconds((prevSeconds) => {
+        if (prevSeconds > 0) {
+          return prevSeconds - 1;
+        } else {
+          setTiming(false);
+          clearInterval(intervalRef.current);
+          return 0;
+        }
+      });
+    }, 1000);
+  }, [timing, seconds]);
+
+  const stopTimer = useCallback(() => {
+    clearInterval(intervalRef.current);
+    setTiming(false);
+  }, []);
+
   return (
     <DataContext.Provider
       value={{
@@ -76,6 +156,14 @@ export const DataProvider = ({ children }) => {
         setSubjects,
         loggedIn,
         setLoggedIn,
+        seconds,
+        setSeconds,
+        resetSeconds,
+        setResetSeconds,
+        timing,
+        setTiming,
+        startTimer,
+        stopTimer,
       }}
     >
       {children}

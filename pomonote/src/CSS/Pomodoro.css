@@ -43,7 +43,6 @@
   cursor: pointer;
 }
 
-
 .smallb {
   border-radius: 30px;
   outline: none;
@@ -56,3 +55,10 @@
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
 }
+.button:hover,
+.smallb:hover {
+  background-color: #f8d7e7 !important; /* Change the background color on hover */
+  color: #fff; /* Change the text color on hover */
+}
+
+/* Add any additional hover effects as needed */

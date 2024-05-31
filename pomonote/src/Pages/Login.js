@@ -3,47 +3,42 @@ import "../CSS/Login.css";
 import { FaUser, FaLock } from "react-icons/fa";
 import { DataContext } from "../DataContext";
 import { useNavigate } from "react-router-dom";
+
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
 
   const formChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
 
-  const { users, setUsers } = useContext(DataContext);
-
-  const { loggedIn, setLoggedIn } = useContext(DataContext);
+  const { users, setUsers, loggedIn, setLoggedIn } = useContext(DataContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(loggedIn);
     if (loggedIn) navigate("/home");
-  }, []);
+  }, [loggedIn, navigate]);
 
   const validate = () => {
-    const test = users.find((x) => (x.email = form.email));
-    if (test) {
-      if (test.password != form.password) {
+    const user = users.find((user) => user.email === form.email);
+    if (user) {
+      if (user.password !== form.password) {
         alert("Incorrect Credentials");
         return;
       }
-
-      setLoggedIn({ username: test.username, email: form.email });
-
+      setLoggedIn({ username: user.username, email: form.email });
       navigate("/home");
-      return;
+    } else {
+      alert("Incorrect Credentials");
     }
-    alert("Incorrect Credentials");
   };
 
   return (
     <div className="body">
       <form className="loginForm" onSubmit={(e) => e.preventDefault()}>
         <div className="logo">
-          <img src="/Blog.png" alt="No img" />
+          <img src="/Vegapotsu.png" alt="" />
         </div>
 
         <div className="inputWithIcon">
